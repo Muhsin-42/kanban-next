@@ -10,7 +10,7 @@ const Header = () => {
         <div className="
             absolute top-0 left-0
             w-full h-96
-            bg-gradient-to-br from-purple-400 to-slate-50
+            bg-gradient-to-br from-purple-400 to-slate-400
             filter blur-3xl opacity-50 -z-50
             rounded-md
             " />
