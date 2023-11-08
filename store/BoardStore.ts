@@ -2,7 +2,8 @@ import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumns';
 import { create } from 'zustand'
 
 interface BoardState {
-    board: Board;
+    // board: Board;
+    board: any;
     getBoard: () => void;
 }
 
