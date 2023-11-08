@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Bars3Icon } from '@heroicons/react/24/solid';
@@ -116,7 +117,8 @@ const Board = () => {
     <section className='mt-10'>
       <div className='w-11/12 md:w-10/12 lg:w-9/12 flex m-auto  rounded-lg overflow-hidden'>
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId='todos' type='group' direction={orientation}>
+          {/* <Droppable droppableId='todos' type='group' direction={orientation}> */}
+          <Droppable droppableId='todos' type='group' direction={'horizontal'}>
             {(provided) => (
               <ul
                 {...provided.droppableProps}
@@ -127,7 +129,7 @@ const Board = () => {
                   <Draggable key={id} index={index} draggableId={id}>
                     {(provided) => (
                       <li
-                        className=' w-full bg-gradient-to-b  from-[#ffffff1f] to-[#fff] text-white shadow-lg  rounded-xl flex cursor-move hover:scale-1'
+                        className=' w-full bg-gradient-to-b  from-[#ffffff1f] to-[#fff] text-white shadow-lg  rounded-xl flex cursor-moved hover:scale-1'
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
