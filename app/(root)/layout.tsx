@@ -25,7 +25,7 @@ const ProtectedLayout = ({children}:{children:React.ReactNode}) =>{
         if(!loader && !authStatus){
             router.push('/sign-in')
         }
-    },[loader,authStatus])
+    },[loader,authStatus,router])
 
     console.log('loader,',loader,' authStatus   ',authStatus)
 

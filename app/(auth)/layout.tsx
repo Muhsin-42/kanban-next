@@ -25,7 +25,7 @@ const UnProtectedLayout = ({children}:{children:React.ReactNode}) =>{
         if(!loader && authStatus){
             router.push('/')
         }
-    },[loader,authStatus])
+    },[loader,authStatus,router])
 
     console.log('loader,',loader,' authStatus   ',authStatus)
 

@@ -46,7 +46,7 @@ const AuthForm: FC<AuthFormProps> = ({
     <form action="#" method="POST" className="mt-8" onSubmit={onSubmit}>
       <div className="space-y-5">
         {fields?.map((field) => (
-          <div>
+          <div key={field.id}>
             <label
               htmlFor="name"
               className="text-base font-medium text-gray-900"
