@@ -99,7 +99,7 @@ const Board = () => {
               <ul 
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className="flex gap-5 w-full flex-col lg:flex-row pb-20"
+                className="flex gap-5  w-full flex-col lg:flex-row pb-20"
               >
                 {todos?.map(({ name, id, list }, index) => (
                   <SingleBoard key={id} name={name} id={id} index={index} list={list} />
