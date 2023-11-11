@@ -36,6 +36,14 @@ export class AppwriteService {
     
     }
 
+    async createUserWithOAuth2(providerName:string){
+        try {
+           const userAccount = account.createOAuth2Session(providerName, conf.homeUrl, conf.signUpUrl);
+        } catch (error) {
+            console.log('OAuth2 :: Error :: ',error)
+        }
+    }
+
     async login( { email, password }: LoginUserAccount) {
        try {
             return await account.createEmailSession(email, password)

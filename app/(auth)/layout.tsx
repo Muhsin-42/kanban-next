@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
 import '../globals.css'
-import type { Metadata } from "next";
 import appwriteService from '@/appwrite/config';
 import { AuthProvider } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
@@ -21,8 +20,6 @@ const UnProtectedLayout = ({children}:{children:React.ReactNode}) =>{
             router.push('/')
         }
     },[loader,authStatus,router])
-
-    console.log('loader,',loader,' authStatus   ',authStatus)
 
     return(
         <AuthProvider value={{authStatus,setAuthStatus}}>

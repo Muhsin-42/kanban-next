@@ -3,6 +3,29 @@ const dataTodos = [
       id: "111",
       status: "do",
       name: "DO",
+      list: []
+    },
+    {
+      id: "222",
+      status: "doing",
+      name: "DOING",
+      list: []
+    },
+    {
+      id: "333",
+      status: "done",
+      name: "DONE",
+      list: []
+    },
+  ]
+
+  export default dataTodos;
+
+  const dummyDAta = [
+    {
+      id: "111",
+      status: "do",
+      name: "DO",
       list: [
         {
           id: "1a9fde3c",
@@ -51,5 +74,3 @@ const dataTodos = [
       ],
     },
   ];
-
-  export default dataTodos;
