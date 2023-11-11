@@ -14,7 +14,9 @@ const Header = () => {
             rounded-md
             " />
 
-            <Image src={'https://links.papareact.com/c2cdd5'} alt="Kanban" width={300} height={100} className="w-44 md:w-56 pb-10 md:pb-0 object-contain"/>
+            {/* <Image src={'https://links.papareact.com/c2cdd5'} alt="Kanban" width={300} height={100} className="w-44 md:w-56 pb-10 md:pb-0 object-contain"/> */}
+            {/* <h1 className="text-5xl font-bold"> 3<span className="text-purple-500">D</span></h1> */}
+            <h1 className="text-5xl font-extrabold">DoDo</h1>
 
 
             <div className="flex items-center w-full space-x-5 flex-1 justify-end">            
@@ -29,13 +31,13 @@ const Header = () => {
         </div> 
 
         {/* GPT */}
-        <div className="flex items-center justify-center px-5 md:py-5">
+        {/* <div className="flex items-center justify-center px-5 md:py-5">
             <p className="flex items-center text-sm font-light pr-5 shadow-xl
                         rounded-xl w-9/12 bg-white p-5">
                 <UserCircleIcon className="inline-block h-10 w-10 text-[#0055D1] mr-1"/>
                 GPT to summarize the day....
             </p>
-        </div>
+        </div> */}
 
   </header> 
   
