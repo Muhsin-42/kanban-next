@@ -88,7 +88,7 @@ const Board = () => {
           onChange={(e)=>setNewTodo(e.target.value)}
           className="w-7/12 py-3 font-semibold placeholder:font-bold text-xl outline-none rounded-full px-5" />
         <button type="submit" className="px-5 rounded-full bg-gradient-to-r from-purple-300 to-purple-500 hover:from-purple-400 hover:to-purple-700 text-white font-bold text-xl">
-          ADD
+          ADD 
         </button>
       </form>
 
@@ -99,10 +99,10 @@ const Board = () => {
               <ul 
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className="flex gap-5 w-full flex-col lg:flex-row pb-20"
+                className="flex gap-5  w-full flex-col lg:flex-row pb-20"
               >
                 {todos?.map(({ name, id, list }, index) => (
-                  <SingleBoard name={name} id={id} index={index} list={list} />
+                  <SingleBoard key={id} name={name} id={id} index={index} list={list} />
                 ))}
                 {provided.placeholder}
               </ul>
