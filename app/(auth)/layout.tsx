@@ -6,11 +6,6 @@ import appwriteService from '@/appwrite/config';
 import { AuthProvider } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 
-export const metadata: Metadata = {
-    title: 'kanban',
-    description: 'A Place to organize all your tasks.'
-}
-
 const UnProtectedLayout = ({children}:{children:React.ReactNode}) =>{
     const router = useRouter();
     const [authStatus,setAuthStatus] = useState(false);
