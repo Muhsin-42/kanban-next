@@ -1,18 +1,17 @@
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import TodoList from "./TodoBar";
 
-const SingleBoard = ({
-  name,
-  id,
-  index,
-  list,
-}: {
+type ISingleBoardProps = {
   name: string;
   id: string;
   index: number;
   list: any;
-}) => {
+  deleteTodo: (id:string) =>void;
+};
+
+const SingleBoard = ({ name, id, index, list, deleteTodo }: ISingleBoardProps) => {
   return (
     <Draggable key={id} index={index} draggableId={id}>
       {(provided) => (
@@ -34,8 +33,9 @@ const SingleBoard = ({
                   <TodoList
                     name={name}
                     id={id}
-                    todos={list} 
+                    todos={list}
                     provided={provided}
+                    deleteTodo={deleteTodo}
                   />
                 </div>
               )}
@@ -48,29 +48,3 @@ const SingleBoard = ({
 };
 
 export default SingleBoard;
-
-function TodoList({ name, id, todos, provided }: any) {
-  return (
-    <div className=" flex flex-col gap-3">
-      {todos?.map((todo: any, index: any) => (
-        <Draggable key={todo.id} index={index} draggableId={todo.id}>
-          {(provided) => (
-            <div
-              className="flex bg-gradient-to-rd shadow-2xl bg-white  from-sky-10d0 to-sky-200d text-blue-950 font-bold gap-3 p-3 rounded w-10/12 m-auto"
-              {...provided.dragHandleProps}
-              {...provided.draggableProps}
-              ref={provided.innerRef}
-            >
-              <Bars3Icon className="h-6 w-6 mr-3 " />
-              <h3>{todo.task}</h3>
-            </div>
-          )}
-        </Draggable>
-      ))}
-      {
-        todos?.length <=0 && <span className="text-black opacity-30 font-bold text-2xl items-center w-full h-full my-auto text-center mt-10">Empty List</span>
-      }
-      {provided.placeholder}
-    </div>
-  );
-}

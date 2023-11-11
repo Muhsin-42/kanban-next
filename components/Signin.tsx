@@ -5,6 +5,7 @@ import { ArrowRight, Loader, RotateCw } from 'lucide-react'
 import authService from '@/appwrite/config'
 import { useRouter } from 'next/navigation'
 import useAuth from '../context/useAuth'
+import { ToastContainer, toast } from 'react-toastify';
 import Link from 'next/link'
 import AuthForm from './shared/Form'
 
@@ -36,6 +37,7 @@ const Signin = () => {
         if(session){
           setAuthStatus(true);
           setFormLoading(false)
+          // toast.success('Login Success');
           router.push('/')
         }
       } catch (error:any) {
@@ -45,6 +47,7 @@ const Signin = () => {
   }
 
   return (
+    <>
     <AuthForm
     onSubmit={handleLogin}
     formData={formData}
@@ -53,6 +56,8 @@ const Signin = () => {
     fields={fields}
     dynamicData={dynamicData}
   />
+  {/* <ToastContainer/> */}
+    </>
   )
 }
 
