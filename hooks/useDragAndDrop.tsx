@@ -1,18 +1,9 @@
+import { ITodoSection } from "@/interfaces/interfaces";
 import React, { useState } from "react";
-interface TodoSection {
-  id: string;
-  status: string;
-  name: string;
-  list: {
-    id: string;
-    task: string;
-    description: string;
-    status: string;
-  }[];
-}
 
-const useDragAndDrop = (initialTodos: TodoSection[]) => {
-  const [todos, setTodos] = useState<TodoSection[]>(initialTodos);
+
+const useDragAndDrop = (initialTodos: ITodoSection[]) => {
+  const [todos, setTodos] = useState<ITodoSection[]>(initialTodos);
 
   const handleOnDragEnd = (result: any) => {
     const { source, destination, type } = result;

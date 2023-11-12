@@ -1,13 +1,13 @@
-import { Bars3Icon } from "@heroicons/react/24/solid";
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import TodoList from "./TodoBar";
+import { Itodo } from "@/interfaces/interfaces";
 
 type ISingleBoardProps = {
   name: string;
   id: string;
   index: number;
-  list: any;
+  list: Itodo[];
   deleteTodo: (id:string) =>void;
 };
 
@@ -31,8 +31,6 @@ const SingleBoard = ({ name, id, index, list, deleteTodo }: ISingleBoardProps) =
                   className=" min-w-full !opacity-80 min-h-full"
                 >
                   <TodoList
-                    name={name}
-                    id={id}
                     todos={list}
                     provided={provided}
                     deleteTodo={deleteTodo}

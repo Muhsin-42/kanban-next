@@ -12,8 +12,8 @@ import useDeleteTodo from "@/hooks/useDeleteTodo";
 const Board = () => {
   const { todos, handleOnDragEnd, setTodos } = useDragAndDrop(dataTodos)
   const { orientation } = useResize();
-  const { newTodo, setNewTodo, addTodo } = useAddTodo(setTodos,todos);
-  const { deleteTodo } = useDeleteTodo(setTodos,todos);
+  const { newTodo, setNewTodo, addTodo } = useAddTodo({setTodos,todos});
+  const { deleteTodo } = useDeleteTodo({setTodos,todos});
 
   return (
     <section className="mt-10">     

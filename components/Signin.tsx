@@ -1,12 +1,9 @@
 'use client'
 
-import React, {createContext, useState, FormEvent} from 'react'
-import { ArrowRight, Loader, RotateCw } from 'lucide-react'
+import React, { useState, FormEvent} from 'react'
 import authService from '@/appwrite/config'
 import { useRouter } from 'next/navigation'
 import useAuth from '../context/useAuth'
-import { ToastContainer, toast } from 'react-toastify';
-import Link from 'next/link'
 import AuthForm from './shared/Form'
 
 const fields = [

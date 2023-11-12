@@ -1,11 +1,9 @@
 'use client'
 
 import React, { useState, FormEvent} from 'react'
-import { ArrowRight, Loader } from 'lucide-react'
 import authService from '@/appwrite/config'
 import { useRouter } from 'next/navigation'
 import useAuth from '../context/useAuth'
-import Link from 'next/link'
 import AuthForm from './shared/Form'
 
 const fields = [
