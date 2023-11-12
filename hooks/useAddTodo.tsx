@@ -1,26 +1,15 @@
+import { ITodoSection } from '@/interfaces/interfaces';
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react'
 
-interface TodoSection {
-    id: string;
-    status: string;
-    name: string;
-    list: {
-      id: string;
-      task: string;
-      description: string;
-      status: string;
-    }[];
-  }
-  
 
 interface IUseAddTodo {
-    setNewTodo: Dispatch<SetStateAction<string>>;
-    todos: TodoSection[] 
+    setTodos: Dispatch<SetStateAction<ITodoSection[]>>;
+    todos: ITodoSection[] 
 }
 
 
 
-const useAddTodo = (setTodos:Dispatch<SetStateAction<TodoSection[]>>,todos:TodoSection[]) => {
+const useAddTodo = ({setTodos,todos}: IUseAddTodo) => {
 
     const [newTodo,setNewTodo] = useState('');
 

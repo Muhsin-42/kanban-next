@@ -1,8 +1,11 @@
+import { Itodo } from "@/interfaces/interfaces";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-import { Cross, X } from "lucide-react";
-import { Draggable } from "react-beautiful-dnd";
+import { X } from "lucide-react";
+import { Draggable, DroppableProvided } from "react-beautiful-dnd";
 
-export default function TodoList({ name, id, todos, provided,deleteTodo }: any) {
+interface ITodoList {todos: Itodo[],provided:DroppableProvided,deleteTodo:(id:string) =>void}
+
+export default function TodoList({ todos, provided,deleteTodo }: ITodoList) {
     return (
       <div className=" flex flex-col gap-3">
         {todos?.map((todo: any, index: any) => (

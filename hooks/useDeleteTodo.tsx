@@ -1,17 +1,12 @@
+import { ITodoSection } from '@/interfaces/interfaces'
 import React, { Dispatch } from 'react'
 
-interface TodoSection {
-    id: string;
-    status: string;
-    name: string;
-    list: {
-      id: string;
-      task: string;
-      description: string;
-      status: string;
-    }[];
-  }
-const useDeleteTodo = (setTodos:Dispatch<React.SetStateAction<TodoSection[]>>,todos:TodoSection[]) => {
+type IUseDeleteTodo ={
+  setTodos:Dispatch<React.SetStateAction<ITodoSection[]>>,
+  todos:ITodoSection[]
+}
+
+const useDeleteTodo = ({setTodos,todos}:IUseDeleteTodo) => {
 
     function deleteTodo (id:string) {
         const _todos = todos.map((todoSection)=>{
@@ -20,7 +15,6 @@ const useDeleteTodo = (setTodos:Dispatch<React.SetStateAction<TodoSection[]>>,to
             list: todoSection?.list?.filter((todo)=>todo.id!==id)
           }
         })
-        console.log('_tooo ',_todos)
         setTodos(_todos)
     }
     return { deleteTodo }
