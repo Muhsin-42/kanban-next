@@ -1,5 +1,5 @@
 "use client";
-import appwriteService from "@/appwrite/config";
+import appwriteAuthService from "@/appwrite/config";
 import { Loader, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -22,7 +22,7 @@ const Avatar = ({ name }: { name: string }) => {
   const router = useRouter();
   const logout = async () =>{
     setFormLoading(true);    
-    await appwriteService.logout();
+    await appwriteAuthService.logout();
     setFormLoading(false);
     router.push('/sign-in')
   }

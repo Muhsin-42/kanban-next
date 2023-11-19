@@ -1,21 +1,28 @@
-import { ITodoSection } from '@/interfaces/interfaces'
 import React, { Dispatch } from 'react'
 
 type IUseDeleteTodo ={
-  setTodos:Dispatch<React.SetStateAction<ITodoSection[]>>,
-  todos:ITodoSection[]
+  setGroupedTodos:Dispatch<React.SetStateAction<Map<TypedColumn, Column>>>,
+  groupedTodos: Map<TypedColumn, Column>
 }
 
-const useDeleteTodo = ({setTodos,todos}:IUseDeleteTodo) => {
+const useDeleteTodo = ({setGroupedTodos,groupedTodos}:IUseDeleteTodo) => {
 
-    function deleteTodo (id:string) {
-        const _todos = todos.map((todoSection)=>{
-          return {
-            ...todoSection,
-            list: todoSection?.list?.filter((todo)=>todo.id!==id)
+    function deleteTodo (id:string,columnName:TypedColumn) {
+
+      const column = groupedTodos.get(columnName);
+      if(column){
+        const todoToDelete = column.todos.find(todo=> todo.$id === id);
+        if(todoToDelete){
+          const index = column.todos.indexOf(todoToDelete);
+          const _groupedTodos = structuredClone(groupedTodos);
+
+          const _column = _groupedTodos.get(columnName);
+          if(_column){
+            _column.todos.splice(index,1);
+            setGroupedTodos(_groupedTodos);
           }
-        })
-        setTodos(_todos)
+        }
+      }
     }
     return { deleteTodo }
 }

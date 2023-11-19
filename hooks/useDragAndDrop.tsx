@@ -1,9 +1,9 @@
-import { ITodoSection } from "@/interfaces/interfaces";
-import React, { useState } from "react";
+import { useState } from "react";
 
+type InitialTodos = Map<TypedColumn, Column>;
 
-const useDragAndDrop = (initialTodos: ITodoSection[]) => {
-  const [todos, setTodos] = useState<ITodoSection[]>(initialTodos);
+const useDragAndDrop = (initialTodos: InitialTodos) => {
+  const [groupedTodos, setGroupedTodos] = useState<InitialTodos>(initialTodos);
 
   const handleOnDragEnd = (result: any) => {
     const { source, destination, type } = result;
@@ -16,28 +16,29 @@ const useDragAndDrop = (initialTodos: ITodoSection[]) => {
     )
       return;
 
-    const _todos = Array.from(todos);
-
+    const _todos = Array.from(groupedTodos);
     if (type === "group") {
-      const [item] = _todos.splice(result.source.index, 1);
+      const item = _todos.splice(result.source.index, 1)[0];
       _todos.splice(result.destination.index, 0, item);
-      setTodos(_todos);
+      const reorderedTodos = new Map(_todos);
+      setGroupedTodos(reorderedTodos);
     }
 
     if (type === "todos") {
       const sourceGroupIndex = _todos.findIndex(
-        (item) => item.id === source.droppableId
+        (item) => item[0] === source.droppableId
       );
       const destinationGroupIndex = _todos.findIndex(
-        (item) => item.id === destination.droppableId
+        (item) => item[0] === destination.droppableId
       );
-      const [item] = _todos[sourceGroupIndex].list.splice(source.index, 1);
-      _todos[destinationGroupIndex].list.splice(destination.index, 0, item);
-      setTodos(_todos);
+      const [item] = _todos[sourceGroupIndex][1].todos.splice(source.index, 1);
+      _todos[destinationGroupIndex][1].todos.splice(destination.index, 0, item);
+      const reorderedTodos = new Map(_todos);
+      setGroupedTodos(reorderedTodos);
     }
   };
 
-  return { todos, handleOnDragEnd, setTodos };
+  return { groupedTodos, handleOnDragEnd, setGroupedTodos };
 };
 
 export default useDragAndDrop;
