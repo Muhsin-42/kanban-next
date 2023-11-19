@@ -4,14 +4,15 @@ import TodoList from "./TodoBar";
 import { Itodo } from "@/interfaces/interfaces";
 
 type ISingleBoardProps = {
-  name: string;
+  name: TypedColumn;
   id: string;
   index: number;
-  list: Itodo[];
+  todos: Todo[];
   deleteTodo: (id:string) =>void;
 };
 
-const SingleBoard = ({ name, id, index, list, deleteTodo }: ISingleBoardProps) => {
+
+const SingleBoard = ({ name, id, index, todos, deleteTodo }: ISingleBoardProps) => {
   return (
     <Draggable key={id} index={index} draggableId={id}>
       {(provided) => (
@@ -31,9 +32,10 @@ const SingleBoard = ({ name, id, index, list, deleteTodo }: ISingleBoardProps) =
                   className=" min-w-full !opacity-80 min-h-full"
                 >
                   <TodoList
-                    todos={list}
+                    todos={todos}
                     provided={provided}
                     deleteTodo={deleteTodo}
+                    columnName={name}
                   />
                 </div>
               )}

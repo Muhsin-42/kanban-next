@@ -9,7 +9,8 @@ interface IUseAddTodo {
 
 
 
-const useAddTodo = ({setTodos,todos}: IUseAddTodo) => {
+// const useAddTodo = ({setGroupedTodos,groupedTodos}: IUseAddTodo) => {
+const useAddTodo = ({setGroupedTodos,groupedTodos}: any) => {
 
     const [newTodo,setNewTodo] = useState('');
 

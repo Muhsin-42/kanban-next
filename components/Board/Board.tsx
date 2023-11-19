@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import dataTodos from "./data";
 import SingleBoard from "./SingleBoard";
@@ -8,12 +8,26 @@ import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useResize from "@/hooks/useResize";
 import useAddTodo from "@/hooks/useAddTodo";
 import useDeleteTodo from "@/hooks/useDeleteTodo";
+import { useBoardStore } from "@/store/BoardStore";
 
 const Board = () => {
-  const { todos, handleOnDragEnd, setTodos } = useDragAndDrop(dataTodos)
+  const [board,getBoardStore] = useBoardStore(state=> [state.board,state.getBoard]);
   const { orientation } = useResize();
-  const { newTodo, setNewTodo, addTodo } = useAddTodo({setTodos,todos});
-  const { deleteTodo } = useDeleteTodo({setTodos,todos});
+  const { groupedTodos,setGroupedTodos, handleOnDragEnd } = useDragAndDrop(board.columns)
+  const { newTodo, setNewTodo, addTodo } = useAddTodo({setGroupedTodos,groupedTodos});
+  const { deleteTodo } = useDeleteTodo({setGroupedTodos,groupedTodos});
+
+  const get = async() =>{
+    await getBoardStore();
+  }
+
+  useEffect(()=>{
+    setGroupedTodos(board.columns);  
+  },[board]);
+
+  useEffect(()=>{
+    get();
+  },[getBoardStore]);
 
   return (
     <section className="mt-10">     
@@ -31,8 +45,8 @@ const Board = () => {
                 ref={provided.innerRef}
                 className="flex gap-5  w-full flex-col lg:flex-row pb-20"
               >
-                {todos?.map(({ name, id, list }, index) => (
-                  <SingleBoard key={id} name={name} id={id} index={index} list={list} deleteTodo={deleteTodo} />
+                {groupedTodos && Array.from(groupedTodos.entries())?.map(([id,column], index) => (
+                  <SingleBoard key={id} name={id} id={id} index={index} todos={column.todos} deleteTodo={deleteTodo} />
                 ))}
                 {provided.placeholder}
               </ul>

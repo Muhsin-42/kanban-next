@@ -1,4 +1,4 @@
-import {Client, Account,Databases, ID} from 'appwrite'
+import {Client, Account,Databases, ID, Storage} from 'appwrite'
 import conf from '../conf/config'
 
 type CreateUserAccount = {
@@ -19,7 +19,9 @@ appwriteClient.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId);
 
 export const account = new Account(appwriteClient)
 export const databases = new Databases(appwriteClient)
-export class AppwriteService {
+export const storage = new Storage(appwriteClient)
+
+export class AppwriteAuthService {
     //create a new record of user inside appwrite
     async createUserAccount({email, password, name}: CreateUserAccount) {
         try {
@@ -83,6 +85,6 @@ export class AppwriteService {
     
 }
 
-const appwriteService = new AppwriteService()
+const appwriteAuthService = new AppwriteAuthService()
 
-export default appwriteService
+export default appwriteAuthService

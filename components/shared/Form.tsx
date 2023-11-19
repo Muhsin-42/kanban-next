@@ -2,7 +2,7 @@
 import React, { FormEvent, FC, SetStateAction, Dispatch } from "react";
 import { ArrowRight, Loader } from "lucide-react";
 import Link from "next/link";
-import appwriteService from "@/appwrite/config";
+import appwriteAuthService from "@/appwrite/config";
 interface fieldType {
   id: string;
   type: string;
@@ -102,7 +102,7 @@ const AuthForm: FC<AuthFormProps> = ({
               <button
                 type="button"
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
-                onClick={() =>appwriteService.createUserWithOAuth2("google")}
+                onClick={() =>appwriteAuthService.createUserWithOAuth2("google")}
               >
                 <span className="mr-2 inline-block">
                   <svg
