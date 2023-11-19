@@ -6,7 +6,7 @@ import SingleBoard from "./SingleBoard";
 import AddNewTodo from "./AddNewTodo";
 import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useResize from "@/hooks/useResize";
-import useAddTodo from "@/hooks/useAddTodo";
+// import useAddTodo from "@/hooks/useAddTodo";
 import useDeleteTodo from "@/hooks/useDeleteTodo";
 import { useBoardStore } from "@/store/BoardStore";
 
@@ -14,7 +14,7 @@ const Board = () => {
   const [board,getBoardStore] = useBoardStore(state=> [state.board,state.getBoard]);
   const { orientation } = useResize();
   const { groupedTodos,setGroupedTodos, handleOnDragEnd } = useDragAndDrop(board.columns)
-  const { newTodo, setNewTodo, addTodo } = useAddTodo({setGroupedTodos,groupedTodos});
+  // const { newTodo, setNewTodo, addTodo } = useAddTodo({setGroupedTodos,groupedTodos});
   const { deleteTodo } = useDeleteTodo({setGroupedTodos,groupedTodos});
 
   const get = async() =>{
@@ -31,11 +31,11 @@ const Board = () => {
 
   return (
     <section className="mt-10">     
-      <AddNewTodo 
+      {/* <AddNewTodo 
       addTodo={addTodo}
       setNewTodo={setNewTodo}
       newTodo={newTodo}
-      />
+      /> */}
       <div className="w-11/12 md:w-10/12 lg:w-9/12 flex m-auto  rounded-lg overflow-hidden">
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="todos" type="group" direction={orientation}>

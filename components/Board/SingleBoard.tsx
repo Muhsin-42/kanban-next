@@ -8,7 +8,7 @@ type ISingleBoardProps = {
   id: string;
   index: number;
   todos: Todo[];
-  deleteTodo: (id:string) =>void;
+  deleteTodo: (id:string,columnName:TypedColumn) =>void;
 };
 
 
