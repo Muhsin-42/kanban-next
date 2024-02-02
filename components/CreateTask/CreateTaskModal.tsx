@@ -24,26 +24,15 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  CalendarIcon,
-  Circle,
-  CircleDashed,
-  CircleDot,
-  CircleDotIcon,
-  SignalHigh,
-  XCircle,
-} from "lucide-react";
+import { CalendarIcon, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import createTodo from "@/lib/createTodo";
-import appwriteAuthService from "@/appwrite/config";
 import useFetchUser from "@/hooks/useFetchUser";
 import { formSchema } from "@/lib/formSchema";
 
@@ -54,7 +43,7 @@ const CreateTaskModal = ({
   onClose: () => void;
   show: boolean;
 }) => {
-  const { userId } = useFetchUser();
+  const { userId, isUserDataLoading } = useFetchUser();
 
   const [isLoading, setIsLoading] = useState(false);
   const { popupRef } = useClickOutsideModal({
@@ -66,7 +55,7 @@ const CreateTaskModal = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      task: "",
+      title: "",
       description: "",
       dueDate: new Date(),
     },
@@ -75,8 +64,10 @@ const CreateTaskModal = ({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    setIsLoading(true);
     let res = await createTodo(values, userId);
-    console.log("res ", res);
+    setIsLoading(false);
+    onClose();
   }
 
   // console.log("forrrr ", form.getValues());
@@ -94,7 +85,7 @@ const CreateTaskModal = ({
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
             <FormField
               control={form.control}
-              name="task"
+              name="title"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Task</FormLabel>
@@ -193,7 +184,9 @@ const CreateTaskModal = ({
               )}
             />
 
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isUserDataLoading || isLoading}>
+              Submit
+            </Button>
           </form>
         </Form>
       </div>

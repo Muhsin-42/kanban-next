@@ -2,9 +2,9 @@ import { databases } from "@/appwrite/config";
 import conf from "@/conf/config";
 import { ID } from "appwrite";
 
-export default function createTodo(task, userId: string) {
+export default function createTodo(task: Todo, userId: string) {
   const payload = {
-    title: task.task,
+    title: task.title,
     status: "do",
     priority: task.priority,
     userId: userId,
