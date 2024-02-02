@@ -20,7 +20,7 @@ const dynamicData = {
 
 const Signin = () => {
   const router = useRouter();
-  const [formData,setFormData] = useState({email: '',password:''})
+  const [formData,setFormData] = useState({email: 'muhsin@gmail.com',password:'Pa$$w0rd!'})
   const [formLoading,setFormLoading] = useState(false);
   const [error,setError] = useState('')
   

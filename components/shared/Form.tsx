@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, FC, SetStateAction, Dispatch } from "react";
+import React, { FormEvent, SetStateAction, Dispatch } from "react";
 import { ArrowRight, Loader } from "lucide-react";
 import Link from "next/link";
 import appwriteAuthService from "@/appwrite/config";
@@ -20,14 +20,14 @@ interface AuthFormProps {
   formLoading: boolean;
 }
 
-const AuthForm: FC<AuthFormProps> = ({
+const AuthForm = ({
   onSubmit,
   formData,
   setFormData,
   formLoading,
   fields,
   dynamicData,
-}) => {
+}: AuthFormProps) => {
   return (
     <section className="flex justify-center w-full h-screen ">
       <div className="grid grid-cols-1 w-full">
@@ -98,11 +98,13 @@ const AuthForm: FC<AuthFormProps> = ({
                 </div>
               </div>
             </form>
-            <div className="mt-3 space-y-3">
+            {/* <div className="mt-3 space-y-3">
               <button
                 type="button"
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
-                onClick={() =>appwriteAuthService.createUserWithOAuth2("google")}
+                onClick={() =>
+                  appwriteAuthService.createUserWithOAuth2("google")
+                }
               >
                 <span className="mr-2 inline-block">
                   <svg
@@ -116,7 +118,7 @@ const AuthForm: FC<AuthFormProps> = ({
                 </span>
                 Sign up with Google
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
