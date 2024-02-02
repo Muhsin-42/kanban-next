@@ -1,30 +1,40 @@
-import React, { Dispatch } from 'react'
+import { deleteTodoAction } from "@/lib/deleteTodo.Action";
+import React, { Dispatch } from "react";
 
-type IUseDeleteTodo ={
-  setGroupedTodos:Dispatch<React.SetStateAction<Map<TypedColumn, Column>>>,
-  groupedTodos: Map<TypedColumn, Column>
-}
+type IUseDeleteTodo = {
+  setGroupedTodos: Dispatch<React.SetStateAction<Map<TypedColumn, Column>>>;
+  groupedTodos: Map<TypedColumn, Column>;
+};
 
-const useDeleteTodo = ({setGroupedTodos,groupedTodos}:IUseDeleteTodo) => {
+const useDeleteTodo = ({ setGroupedTodos, groupedTodos }: IUseDeleteTodo) => {
+  const deleteFromDb = async (todoId: string) => {
+    console.log("deletioong");
+    try {
+      deleteTodoAction(todoId);
+    } catch (error) {
+      console.log("Error Deleting todo", error);
+    }
+  };
 
-    function deleteTodo (id:string,columnName:TypedColumn) {
+  function deleteTodo(id: string, columnName: TypedColumn) {
+    const column = groupedTodos.get(columnName);
+    if (column) {
+      const todoToDelete = column.todos.find((todo) => todo.$id === id);
+      if (todoToDelete) {
+        const index = column.todos.indexOf(todoToDelete);
+        const _groupedTodos = structuredClone(groupedTodos);
 
-      const column = groupedTodos.get(columnName);
-      if(column){
-        const todoToDelete = column.todos.find(todo=> todo.$id === id);
-        if(todoToDelete){
-          const index = column.todos.indexOf(todoToDelete);
-          const _groupedTodos = structuredClone(groupedTodos);
-
-          const _column = _groupedTodos.get(columnName);
-          if(_column){
-            _column.todos.splice(index,1);
-            setGroupedTodos(_groupedTodos);
-          }
+        const _column = _groupedTodos.get(columnName);
+        if (_column) {
+          _column.todos.splice(index, 1);
+          setGroupedTodos(_groupedTodos);
         }
       }
-    }
-    return { deleteTodo }
-}
 
-export default useDeleteTodo
+      deleteFromDb(id);
+    }
+  }
+  return { deleteTodo };
+};
+
+export default useDeleteTodo;
