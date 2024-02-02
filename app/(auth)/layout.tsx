@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react';
 import '../globals.css'
-import appwriteService from '@/appwrite/config';
+import appwriteAuthService from '@/appwrite/config';
 import { AuthProvider } from '@/context/authContext';
 import { useRouter } from 'next/navigation';
 
@@ -10,7 +10,7 @@ const UnProtectedLayout = ({children}:{children:React.ReactNode}) =>{
     const [authStatus,setAuthStatus] = useState(false);
     const [loader,setLoader] = useState(true);
     useEffect(()=>{
-        appwriteService.isLoggedIn()
+        appwriteAuthService.isLoggedIn()
         .then(setAuthStatus)
         .finally(()=>setLoader(false));
     },[])
