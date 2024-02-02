@@ -1,6 +1,5 @@
 import { databases } from "@/appwrite/config";
 import conf from "@/conf/config";
-import { access } from "fs";
 
 export const getTodosGroupedByColumn = async () => {
   const data = await databases.listDocuments(
@@ -44,13 +43,14 @@ export const getTodosGroupedByColumn = async () => {
 
   // sort columns by columnTypes
   const sortedColumns = new Map(
-    (Array.from(columns.entries()) as [TypedColumn, Column][])
-      .sort((a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0]))
+    (Array.from(columns.entries()) as [TypedColumn, Column][]).sort(
+      (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
+    )
   );
 
   const board: Board = {
-    columns: sortedColumns
-  }
+    columns: sortedColumns,
+  };
 
   return board;
 };
