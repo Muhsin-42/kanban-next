@@ -1,12 +1,15 @@
+import { useBoardStore } from "@/store/BoardStore";
 import { useState } from "react";
 
 type InitialTodos = Map<TypedColumn, Column>;
 
 const useDragAndDrop = (initialTodos: InitialTodos) => {
   const [groupedTodos, setGroupedTodos] = useState<InitialTodos>(initialTodos);
+  const [updateStatusInDb] = useBoardStore((state) => [state.updateStatusInDb]);
 
   const handleOnDragEnd = (result: any) => {
-    const { source, destination, type } = result;
+    const { source, destination, type, draggableId } = result;
+    console.log("result ", result);
 
     if (!destination) return;
 
@@ -36,6 +39,7 @@ const useDragAndDrop = (initialTodos: InitialTodos) => {
       const reorderedTodos = new Map(_todos);
       setGroupedTodos(reorderedTodos);
     }
+    updateStatusInDb(draggableId, destination?.droppableId!);
   };
 
   return { groupedTodos, handleOnDragEnd, setGroupedTodos };

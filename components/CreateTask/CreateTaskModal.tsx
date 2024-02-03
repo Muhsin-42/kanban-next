@@ -35,6 +35,7 @@ import { cn } from "@/lib/utils";
 import createTodo from "@/lib/createTodo";
 import useFetchUser from "@/hooks/useFetchUser";
 import { formSchema } from "@/lib/formSchema";
+import { useBoardStore } from "@/store/BoardStore";
 
 const CreateTaskModal = ({
   onClose,
@@ -44,7 +45,10 @@ const CreateTaskModal = ({
   show: boolean;
 }) => {
   const { userId, isUserDataLoading } = useFetchUser();
-
+  const [createTodoInDb, getBoard] = useBoardStore((state) => [
+    state.createTodoInDb,
+    state.getBoard,
+  ]);
   const [isLoading, setIsLoading] = useState(false);
   const { popupRef } = useClickOutsideModal({
     onClose,
@@ -65,7 +69,8 @@ const CreateTaskModal = ({
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     setIsLoading(true);
-    let res = await createTodo(values, userId);
+    let res = await createTodoInDb(values, userId);
+    await getBoard();
     setIsLoading(false);
     onClose();
   }

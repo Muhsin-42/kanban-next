@@ -8,7 +8,6 @@ type IUseDeleteTodo = {
 
 const useDeleteTodo = ({ setGroupedTodos, groupedTodos }: IUseDeleteTodo) => {
   const deleteFromDb = async (todoId: string) => {
-    console.log("deletioong");
     try {
       deleteTodoAction(todoId);
     } catch (error) {
