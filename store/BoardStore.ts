@@ -40,7 +40,7 @@ export const useBoardStore = create<BoardState>((set) => ({
       dueDate: task.dueDate,
       description: task.description,
     };
-    databases.createDocument(
+    await databases.createDocument(
       conf.databaseId,
       conf.todosCollectionId,
       ID.unique(),
